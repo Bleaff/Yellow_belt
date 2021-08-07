@@ -94,13 +94,21 @@ private:
 };
 
 int GetDistinctRealRootCount(double a, double b, double c) {
-  // Вы можете вставлять сюда различные реализации функции,
-  // чтобы проверить, что ваши тесты пропускают корректный код
-  // и ловят некорректный
+  return -1;
 }
+
+void RootCount()
+{
+  for (size_t i = 0; i < 200; i++) {
+    int rootcount = GetDistinctRealRootCount(i / 2 , i * 9, i);
+    Assert((rootcount >= 0 && rootcount <= 2), "Root count more than 2 or less than 0!");
+  }
+}
+
+void One 
 
 int main() {
   TestRunner runner;
-  // добавьте сюда свои тесты
+  runner.RunTest(RootCount, "RootCount");
   return 0;
 }
