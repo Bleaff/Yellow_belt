@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include<random>
 
 using namespace std;
 
@@ -94,7 +95,7 @@ private:
 };
 
 int GetDistinctRealRootCount(double a, double b, double c) {
-  return -1;
+  return 2;
 }
 
 void RootCount()
@@ -105,10 +106,27 @@ void RootCount()
   }
 }
 
-void One 
+void OneRootTest()
+{
+  std::random_device rd;
+  std::mt19937 mersenne(rd());
+  for (size_t i = 0; i < 200; i++) {
+    stringstream hint;
+    int b = mersenne() * 2, c = b * b;
+    int rootcount = GetDistinctRealRootCount(1, b, c);
+    hint << "Root count not equal 1, position: " << "x^2 " << b << "x +" << c;
+    AssertEqual(rootcount, 1, hint.str());
+    stringstream hint1;
+    b = (-1) * mersenne() * 2, c = b * b;
+    rootcount = GetDistinctRealRootCount(1, b, c);
+    hint1 << "Root count not equal 1, position: " << "x^2 " << b << "x +" << c;
+    AssertEqual(rootcount, 1, hint1.str());
+  }
+}
 
 int main() {
   TestRunner runner;
   runner.RunTest(RootCount, "RootCount");
+  runner.RunTest(OneRootTest,"OneRootTest");
   return 0;
 }
